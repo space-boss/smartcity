@@ -1,0 +1,123 @@
+* {
+	box-sizing: border-box;
+}
+
+body,
+html {
+	margin: 0;
+	padding: 0;
+	font-family: 'Dongle', sans-serif;
+}
+
+h1,
+h2,
+h3,
+.bagel-font {
+	font-family: 'Bagel Fat One', cursive;
+}
+
+header {
+	background-color: rgba(238, 150, 75, 0.6);
+}
+
+/* Container for centering content at max 1440px */
+.header {
+	width: 100%;
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 24px 144px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 122px;
+}
+
+/* Logo area: the placeholder square plus the brand name */
+.logo-area {
+	display: flex;
+	align-items: center;
+}
+
+/* Placeholder logo square */
+.logo-square {
+	width: 74px;
+	height: 74px;
+	background-color: #eee;
+	margin-right: 24px;
+}
+
+.logo-area h1 {
+	font-family: 'Bagel Fat One', cursive;
+	font-size: 48px;
+	margin: 0;
+}
+
+.header-links {
+	list-style: none;
+	display: flex;
+	gap: 32px;
+	/* spacing between nav items */
+	margin: 0;
+	margin-top: 24px;
+	padding: 0;
+	text-decoration: none;
+	color: #000;
+	font-size: 40px;
+}
+
+.header-link {
+	text-decoration: none;
+	color: #000;
+	font-size: 40px;
+}
+
+main {
+	margin: 0 145px;
+}
+
+.intro-section {
+	background-color: #fff;
+	padding: 40px 0;
+}
+
+.intro-container {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+/* Text Content */
+.intro-content {
+	flex: 1;
+	margin-right: 20px;
+}
+
+.intro-heading {
+	font-family: 'Bagel Fat One';
+	font-size: 64px;
+	margin: 0 0 16px 0;
+	line-height: 1.2;
+}
+
+.intro-paragraph {
+	font-family: 'Dongle', sans-serif;
+	font-size: 22px;
+	line-height: 1.4;
+	margin: 0;
+}
+
+/* Image Content */
+.intro-image-container {
+	flex-shrink: 0;
+	max-width: 480px;
+}
+
+.intro-image {
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+	/* Optional: adjust for rounded corners */
+}

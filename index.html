@@ -1,148 +1,218 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stellplatzschlüssel Berechnung</title>
-  <link rel="stylesheet" href="styles.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Stellplatzschlüssel Berechnung</title>
+	<link rel="stylesheet" href="styles.css">
+	<!-- Preconnect for improved performance -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<!-- Import Bagel Fat One and Dongle -->
+	<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dongle&display=swap" rel="stylesheet">
+	<!-- Your other head content -->
 </head>
+
 <body>
-  <header>
-    <h1>Stellplatzschlüssel Berechnung</h1>
-  </header>
-  
-  <main>
-    <form id="calculationForm">
-         <!-- Quartiertyp composed of two dropdowns -->
+	<header>
+		<div class="header">
+			<!-- Left side: logo + brand name -->
+			<div class="logo-area">
+				<!-- Placeholder square for your logo -->
+				<div class="logo-square"></div>
+				<h1>Tool Name</h1>
+			</div>
 
-        <fieldset>
-            <legend>Quartiertyp</legend>
-            <div class="form-group">
-              <label for="anteilWohnen">Anteil Wohnen</label>
-              <select id="anteilWohnen" name="anteilWohnen">
-                <option value="">Bitte wählen</option>
-                <option value="W-">niedrig (&lt;40% der Gebietsfläche)</option>
-                <option value="Wo">mittel (40-80% der Gebietsfläche)</option>
-                <option value="W+">hoch (&gt; 80% der Gebietsfläche)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="dichte">Dichte</label>
-              <select id="dichte" name="dichte">
-                <option value="">Bitte wählen</option>
-                <option value="D--">niedrig (150 - 3.000 Einwohner je km2)</option>
-                <option value="D-">eher niedrig (3.000 - 5.0000 Einwohner je km2)</option>
-                <option value="D+">eher hoch (5.000 - 10.0000 Einwohner je km2)</option>
-                <option value="D++"> hoch (&gt; 10.0000 Einwohner je km2)</option>
-              </select>
-            </div>
-          </fieldset>
+			<!-- Right side: navigation menu -->
+			<nav>
+				<ul class="header-links">
+					<li><a class="header-link" href="#stellplatzproblematik">Stellplatzproblematik</a></li>
+					<li><a class="header-link" href="#methodik">Methodik</a></li>
+					<li><a class="header-link" href="#berechnung">Berechnung</a></li>
+					<li><a class="header-link" href="#ueber-uns">Über Uns</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
 
-      <!-- Wege zum Einkaufen (Nahversorgung) -->
-      <div class="form-group">
-        <label for="nahversorgungKategorie">Wege zum Einkaufen</label>
-        <select id="nahversorgungKategorie" name="nahversorgungKategorie">
-          <option value="">Bitte wählen</option>
-          <option value="<5">&lt;5 Minuten</option>
-          <option value="5-10">5-10 Minuten</option>
-          <option value="10-15">10-15 Minuten</option>
-          <option value=">15">&gt;15 Minuten</option>
-        </select>
-      </div>
+	<main>
 
-      <!-- Nutzungsart (Mehrfachauswahl möglich) -->
-      <div class="form-group">
-        <label>Nutzungsart (Nicht-Wohnnutzung, Mehrfachauswahl möglich)</label>
-        <div>
-          <input type="checkbox" id="nutzungsart_gewerbe" name="nutzungsart" value="gewerbe">
-          <label for="nutzungsart_gewerbe">Gewerbe/Dienstleistungen</label>
-        </div>
-        <div>
-          <input type="checkbox" id="nutzungsart_kultur" name="nutzungsart" value="kultur">
-          <label for="nutzungsart_kultur">Kultur</label>
-        </div>
-        <div>
-          <input type="checkbox" id="nutzungsart_bildung" name="nutzungsart" value="bildung">
-          <label for="nutzungsart_bildung">Bildung</label>
-        </div>
-        <div>
-          <input type="checkbox" id="nutzungsart_sozial" name="nutzungsart" value="sozial">
-          <label for="nutzungsart_sozial">Soziales</label>
-        </div>
-        <div>
-          <input type="checkbox" id="nutzungsart_gesundheit" name="nutzungsart" value="gesundheit">
-          <label for="nutzungsart_gesundheit">Gesundheit</label>
-        </div>
-        <div>
-          <input type="checkbox" id="nutzungsart_freizeit" name="nutzungsart" value="freizeit">
-          <label for="nutzungsart_freizeit">Freizeit</label>
-        </div>
-      </div>
-      
-      <!-- Bus (Distanz und Takt) -->
-      <div class="form-group">
-        <label for="busCombined">Entfernung zur Bushaltestelle + Taktdichte</label>
-        <select id="busCombined" name="busCombined">
-          <option value="">Bitte wählen</option>
-          <option value="<150_hoch">&lt;150 + hoch</option>
-          <option value="<150_niedrig">&lt;150 + niedrig</option>
-          <option value="150-300_hoch">150-300 + hoch</option>
-          <option value="150-300_niedrig">150-300 + niedrig</option>
-          <option value=">300_any">&gt;300</option>
-        </select>
-      </div>
-
-      <!-- Schienenanbindung -->
-      <div class="form-group">
-        <label for="railCombined">Entfernung zur Schienenanbindung + Taktdichte</label>
-        <select id="railCombined" name="railCombined">
-          <option value="">Bitte wählen</option>
-          <option value="<300_hoch">&lt;300 + hoch</option>
-          <option value="<300_niedrig">&lt;300 + niedrig</option>
-          <option value="300-600_hoch">300-600 + hoch</option>
-          <option value="300-600_niedrig">300-600 + niedrig</option>
-          <option value=">600_any">&gt;600</option>
-          <option value="none">Keine Schienenanbindung</option>
-        </select>
-      </div>
-
-      <!-- ÖPNV-Reisezeit ins Zentrum -->
-      <div class="form-group">
-        <label for="travelTimeCategory">ÖPNV-Reisezeit ins Zentrum</label>
-        <select id="travelTimeCategory" name="travelTimeCategory">
-          <option value="">Bitte wählen</option>
-          <option value="kurz">Kurz</option>
-          <option value="mittel">Mittel</option>
-          <option value="lang">Lang</option>
-        </select>
-      </div>
-
-      <!-- Geplante Wohneinheiten -->
-      <div class="form-group">
-        <label for="geplanteWohneinheiten">Geplante Wohneinheiten</label>
-        <input type="number" id="geplanteWohneinheiten" name="geplanteWohneinheiten" placeholder="z.B. 120">
-      </div>
-
-      <button type="submit">Berechnen</button>
-    </form>
-
-    <div id="result">
-        <output id="result">Ergebnis wird hier angezeigt</output>
-    </div>
-
-    <div id="methodExplanation">
-        <h2>Methode</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.</p>
-        <p>Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra.</p>
-    </div>
-
-    <footer>
-        <p>&copy; <script>document.write(new Date().getFullYear());</script> HCU Smart City WiSe 2024/2025</p>
-      </footer>
-
-  </main>
+		<section class="intro-section">
+			<div class="intro-container">
+				<div class="intro-content">
+					<h2 class="intro-heading">Überdimensionierte Parkplätze behindern die Mobilitätswende</h2>
+					<p class="intro-paragraph">
+						In dem aktuellen Bundesländervergleich über Baden-Württemberg können die Kommunen
+						mit Hilfe von Stellplatzsatzungen eigene Regeln für Stellplätze im Wohnungsbau
+						festlegen. Allerdings basieren diese Regeln nicht auf empirischen Daten,
+						sondern auf willkürlichen Werten, was in der Regel zu einer Überversorgung führt.
+						Diese zusätzliche Autofristation bremst den ohnehin nötigen Wandel.
+					</p>
+				</div>
+				<div class="intro-image-container">
+					<img class="intro-image" src="images/image-01.png" alt="Parkplätze behindern die Mobilitätswende">
+				</div>
+			</div>
+		</section>
 
 
-  <script src="script.js"></script>
+
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+
+		<form id="calculationForm">
+			<!-- Quartiertyp composed of two dropdowns -->
+
+			<fieldset>
+				<legend>Quartiertyp</legend>
+				<div class="form-group">
+					<label for="anteilWohnen">Anteil Wohnen</label>
+					<select id="anteilWohnen" name="anteilWohnen">
+						<option value="">Bitte wählen</option>
+						<option value="W-">niedrig (&lt;40% der Gebietsfläche)</option>
+						<option value="Wo">mittel (40-80% der Gebietsfläche)</option>
+						<option value="W+">hoch (&gt; 80% der Gebietsfläche)</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="dichte">Dichte</label>
+					<select id="dichte" name="dichte">
+						<option value="">Bitte wählen</option>
+						<option value="D--">niedrig (150 - 3.000 Einwohner je km2)</option>
+						<option value="D-">eher niedrig (3.000 - 5.0000 Einwohner je km2)</option>
+						<option value="D+">eher hoch (5.000 - 10.0000 Einwohner je km2)</option>
+						<option value="D++"> hoch (&gt; 10.0000 Einwohner je km2)</option>
+					</select>
+				</div>
+			</fieldset>
+
+			<!-- Wege zum Einkaufen (Nahversorgung) -->
+			<div class="form-group">
+				<label for="nahversorgungKategorie">Wege zum Einkaufen</label>
+				<select id="nahversorgungKategorie" name="nahversorgungKategorie">
+					<option value="">Bitte wählen</option>
+					<option value="<5">&lt;5 Minuten</option>
+					<option value="5-10">5-10 Minuten</option>
+					<option value="10-15">10-15 Minuten</option>
+					<option value=">15">&gt;15 Minuten</option>
+				</select>
+			</div>
+
+			<!-- Nutzungsart (Mehrfachauswahl möglich) -->
+			<div class="form-group">
+				<label>Nutzungsart (Nicht-Wohnnutzung, Mehrfachauswahl möglich)</label>
+				<div>
+					<input type="checkbox" id="nutzungsart_gewerbe" name="nutzungsart" value="gewerbe">
+					<label for="nutzungsart_gewerbe">Gewerbe/Dienstleistungen</label>
+				</div>
+				<div>
+					<input type="checkbox" id="nutzungsart_kultur" name="nutzungsart" value="kultur">
+					<label for="nutzungsart_kultur">Kultur</label>
+				</div>
+				<div>
+					<input type="checkbox" id="nutzungsart_bildung" name="nutzungsart" value="bildung">
+					<label for="nutzungsart_bildung">Bildung</label>
+				</div>
+				<div>
+					<input type="checkbox" id="nutzungsart_sozial" name="nutzungsart" value="sozial">
+					<label for="nutzungsart_sozial">Soziales</label>
+				</div>
+				<div>
+					<input type="checkbox" id="nutzungsart_gesundheit" name="nutzungsart" value="gesundheit">
+					<label for="nutzungsart_gesundheit">Gesundheit</label>
+				</div>
+				<div>
+					<input type="checkbox" id="nutzungsart_freizeit" name="nutzungsart" value="freizeit">
+					<label for="nutzungsart_freizeit">Freizeit</label>
+				</div>
+			</div>
+
+			<!-- Bus (Distanz und Takt) -->
+			<div class="form-group">
+				<label for="busCombined">Entfernung zur Bushaltestelle + Taktdichte</label>
+				<select id="busCombined" name="busCombined">
+					<option value="">Bitte wählen</option>
+					<option value="<150_hoch">&lt;150 + hoch</option>
+					<option value="<150_niedrig">&lt;150 + niedrig</option>
+					<option value="150-300_hoch">150-300 + hoch</option>
+					<option value="150-300_niedrig">150-300 + niedrig</option>
+					<option value=">300_any">&gt;300</option>
+				</select>
+			</div>
+
+			<!-- Schienenanbindung -->
+			<div class="form-group">
+				<label for="railCombined">Entfernung zur Schienenanbindung + Taktdichte</label>
+				<select id="railCombined" name="railCombined">
+					<option value="">Bitte wählen</option>
+					<option value="<300_hoch">&lt;300 + hoch</option>
+					<option value="<300_niedrig">&lt;300 + niedrig</option>
+					<option value="300-600_hoch">300-600 + hoch</option>
+					<option value="300-600_niedrig">300-600 + niedrig</option>
+					<option value=">600_any">&gt;600</option>
+					<option value="none">Keine Schienenanbindung</option>
+				</select>
+			</div>
+
+			<!-- ÖPNV-Reisezeit ins Zentrum -->
+			<div class="form-group">
+				<label for="travelTimeCategory">ÖPNV-Reisezeit ins Zentrum</label>
+				<select id="travelTimeCategory" name="travelTimeCategory">
+					<option value="">Bitte wählen</option>
+					<option value="kurz">Kurz</option>
+					<option value="mittel">Mittel</option>
+					<option value="lang">Lang</option>
+				</select>
+			</div>
+
+			<!-- Geplante Wohneinheiten -->
+			<div class="form-group">
+				<label for="geplanteWohneinheiten">Geplante Wohneinheiten</label>
+				<input type="number" id="geplanteWohneinheiten" name="geplanteWohneinheiten" placeholder="z.B. 120">
+			</div>
+
+			<button type="submit">Berechnen</button>
+		</form>
+
+		<div id="result">
+			<output id="result">Ergebnis wird hier angezeigt</output>
+		</div>
+
+		<div id="methodExplanation">
+			<h2>Methode</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus
+				ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.</p>
+			<p>Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum
+				lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra.</p>
+		</div>
+
+		<footer>
+			<p>&copy;
+				<script>document.write(new Date().getFullYear());</script> HCU Smart City WiSe 2024/2025
+			</p>
+		</footer>
+
+	</main>
+
+
+	<script src="script.js"></script>
 </body>
+
 </html>
