@@ -77,18 +77,15 @@ header {
 }
 
 /* Container that centers content up to your max width (e.g., 1440px) */
-.intro-section {
+.section {
 	background-color: #fff;
-	padding: 70px 0 0;
+	padding: 0;
 	max-lines: 1151px;
 }
 
 .intro-container {
-	/* or match your main container width */
 	margin: 0 auto;
-	/* center horizontally */
 	padding: 0;
-	/* optional horizontal padding */
 }
 
 /* Heading spans the full width of .intro-container */
@@ -350,4 +347,171 @@ header {
 	right: 20px;
 	font-size: 80px;
 	cursor: pointer;
+}
+
+/* Basic form reset / structure */
+.berechnung-container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0;
+	max-width: 1110px;
+	padding: 0;
+	margin: 0;
+}
+
+/* Form container styling */
+#calculationForm {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	width: 100%;
+	margin: 0;
+	font-family: 'Dongle', sans-serif;
+}
+
+/* Overall form block */
+.form-block {
+	width: 100%;
+	background-color: #B6E5E5;
+	border-radius: 16px;
+	overflow: hidden;
+	box-sizing: border-box;
+	/* For blocks that don’t need a header bar, padding is applied directly */
+	padding: 16px;
+}
+
+/* Form block with header (e.g., Quartiertyp) */
+.form-block.quartiertyp-block {
+	padding: 0;
+}
+
+/* .form-block-header {
+	background-color: rgba(40, 175, 176, 0.5);
+	height: 74px;
+	display: flex;
+	align-items: center;
+	padding: 0 16px;
+	border-top-left-radius: 16px;
+	border-top-right-radius: 16px;
+	margin: 0;
+} */
+
+.form-block-header h3 {
+	font-family: 'Bagel Fat One', cursive;
+	font-size: 40px;
+	padding-left: 15px;
+	margin: 0;
+	color: #000;
+}
+
+/* Content area below the header */
+.form-block-content {
+	padding: 0;
+}
+
+/* Container for two dropdowns in Quartiertyp */
+.two-dropdowns {
+	display: flex;
+	flex-direction: column;
+	gap: 0px;
+}
+
+/* Label styling for dropdowns */
+.dropdown-block label {
+	display: block;
+	font-family: 'Dongle', sans-serif;
+	font-size: 35px;
+	color: #000;
+}
+
+/* Dropdown select styling */
+.dropdown-block select {
+	width: 344px;
+	height: 50px;
+	background-color: rgba(40, 175, 176, 0.5);
+	background-image: url("images/triangle.svg");
+	background-repeat: no-repeat;
+	background-position: right 16px center;
+	background-size: 10px;
+	border: none;
+	border-radius: 8px;
+	color: black;
+	font-size: 25px;
+	font-family: 'Dongle', sans-serif;
+	padding: 0 36px 0 12px;
+	cursor: pointer;
+	appearance: none;
+}
+
+/* Styling for single dropdown blocks (for other steps) */
+.form-block>label {
+	display: block;
+	font-family: 'Bagel Fat One', cursive;
+	font-size: 40px;
+	margin: 0 0 8px 16px;
+	color: #000;
+}
+
+/* Dropdowns in other blocks */
+.form-block select {
+	width: 344px;
+	height: 50px;
+	background-color: rgba(40, 175, 176, 0.5);
+	background-image: url("images/triangle.svg");
+	background-repeat: no-repeat;
+	background-position: right 16px center;
+	background-size: 10px;
+	border: none;
+	border-radius: 8px;
+	color: #000;
+	font-size: 25px;
+	font-family: 'Dongle', sans-serif;
+	padding: 0 36px 0 12px;
+	cursor: pointer;
+	appearance: none;
+}
+
+/* Number input styling */
+.form-block input[type="number"] {
+	width: 344px;
+	height: 50px;
+	background-color: rgba(40, 175, 176, 0.5);
+	border: none;
+	border-radius: 8px;
+	color: #000;
+	font-size: 25px;
+	font-family: 'Dongle', sans-serif;
+	padding: 0 12px;
+	cursor: pointer;
+}
+
+/* Checkbox group styling */
+.checkbox-group {
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.checkbox-group input[type="checkbox"] {
+	margin-right: 8px;
+}
+
+/* Submit button styling */
+#calculationForm button[type="submit"] {
+	align-self: flex-end;
+	background-color: #FFBA00;
+	color: #fff;
+	border: none;
+	padding: 12px 24px;
+	font-size: 20px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-family: 'Bagel Fat One', cursive;
+	transition: background-color 0.2s;
+	margin-top: 16px;
+}
+
+#calculationForm button[type="submit"]:hover {
+	background-color: #ffa500;
 }
