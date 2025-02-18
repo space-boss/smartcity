@@ -1,5 +1,4 @@
 // Mapping objects for calculation factors
-
 const basiswertMap = {
 	"D--W+": 1.3,
 	"D--Wo": 1.1,
@@ -54,7 +53,6 @@ const travelTimeMap = {
 
 // Helper function for Nutzungsart factor
 function getNutzungsartFaktor(selectedCategories) {
-	// Count distinct selections (they're already unique via checkboxes)
 	const uniqueCount = selectedCategories.length;
 	const count = Math.min(uniqueCount, 3); // cap effect at 3
 	return nutzungsartFactors[count];
@@ -76,65 +74,74 @@ function calculateStellplatzSchluessel(params) {
 	const travelTimeFaktor = travelTimeMap[params.travelTimeCategory] || 1.0;
 
 	// Calculate Stellplatzschlüssel as the product of all factors
-	const stellplatzSchluessel = basiswert * nahversorgungFaktor * nutzungsartFaktor * busFaktor * railFaktor * travelTimeFaktor;
+	const stellplatzSchluessel = basiswert
+		* nahversorgungFaktor
+		* nutzungsartFaktor
+		* busFaktor
+		* railFaktor
+		* travelTimeFaktor;
 
-	// Multiply by planned residential units to get the total expected cars
+	// Multiply by planned residential units to get total expected cars
 	const erwartetePkw = stellplatzSchluessel * params.geplanteWohneinheiten;
 
 	return { stellplatzSchluessel, erwartetePkw };
 }
 
-// DOMContentLoaded: Wait for the page to fully load
+// Wait for the DOM to load before adding event listeners
 document.addEventListener("DOMContentLoaded", () => {
 	const form = document.getElementById("calculationForm");
 
 	form.addEventListener("submit", (e) => {
-		e.preventDefault(); // Prevent the page from reloading
+		e.preventDefault();
 
 		// Combine Quartiertyp from the two dropdowns: dichte + anteilWohnen
 		const anteilWohnen = document.getElementById("anteilWohnen").value;
 		const dichte = document.getElementById("dichte").value;
 		const quartiertyp = dichte + anteilWohnen;
 
-		// Get Nahversorgung category
+		// Nahversorgung
 		const nahversorgungKategorie = document.getElementById("nahversorgungKategorie").value;
 
-		// Get Nutzungsart: gather all checked checkboxes
+		// Nutzungsart: gather all checked checkboxes
 		const nutzungsartElements = document.querySelectorAll('input[name="nutzungsart"]:checked');
 		const nutzungsart = Array.from(nutzungsartElements).map(el => el.value);
 
-		// Get Bus factor from the combined dropdown
+		// Bus factor
 		const busCombined = document.getElementById("busCombined").value;
 
-		// Get Rail factor from the combined dropdown
+		// Rail factor
 		const railCombined = document.getElementById("railCombined").value;
 
-		// Get ÖPNV-Reisezeit category
+		// ÖPNV-Reisezeit
 		const travelTimeCategory = document.getElementById("travelTimeCategory").value;
 
-		// Get planned residential units
+		// Planned residential units
 		const geplanteWohneinheiten = Number(document.getElementById("geplanteWohneinheiten").value);
 
-		// Assemble all parameters into an object
+		// Assemble all parameters
 		const params = {
-			quartiertyp, // e.g., "D--W+"
-			nahversorgungKategorie, // e.g., "<5"
-			nutzungsart, // array of strings
-			busCombined, // e.g., "<150_hoch"
-			railCombined, // e.g., "<300_hoch"
-			travelTimeCategory, // e.g., "kurz"
-			geplanteWohneinheiten // number
+			quartiertyp, // e.g. "D--W+"
+			nahversorgungKategorie, // e.g. "<5"
+			nutzungsart,            // array of strings
+			busCombined,            // e.g. "<150_hoch"
+			railCombined,           // e.g. "<300_hoch"
+			travelTimeCategory,     // e.g. "kurz"
+			geplanteWohneinheiten   // number
 		};
 
 		// Calculate results
 		const result = calculateStellplatzSchluessel(params);
 
-		// Display results in the designated output element (with rounding)
-		document.getElementById("result").innerText =
-			"Stellplatzschlüssel: " + result.stellplatzSchluessel.toFixed(2) +
-			"\nErwartete Pkw: " + Math.round(result.erwartetePkw);
+		// Display results in your new fields
+		// Replace the "--" with the actual calculation
+		document.getElementById("stellplatzschluessel").innerText =
+			result.stellplatzSchluessel.toFixed(2);
+
+		document.getElementById("erwartetePkw").innerText =
+			Math.round(result.erwartetePkw);
 	});
 });
+
 
 // Wait for the DOM to load
 document.addEventListener("DOMContentLoaded", () => {
@@ -143,7 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	const modalText = document.getElementById("modal-text");
 	const closeButton = document.querySelector(".close-button");
 
-	// Example information for each info icon (you can extend this or load dynamically)
 	const infoContent = {
 		"info-wohnheiten": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
 		"info-maximal": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
@@ -152,11 +158,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Add click event listener to each info icon
 	document.querySelectorAll(".info-icon").forEach(icon => {
 		icon.addEventListener("click", () => {
-			// Get the data-info attribute value
 			const infoKey = icon.getAttribute("data-info");
-			// Load the corresponding content or default text
 			modalText.textContent = infoContent[infoKey] || "Weitere Informationen folgen.";
-			// Show the modal
 			modal.style.display = "block";
 		});
 	});

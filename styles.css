@@ -21,7 +21,7 @@ h3,
 /* Header background spans full width */
 header {
 	width: 100%;
-	background-color: rgba(238, 150, 75, 0.6);
+	background-color: #F4D35E;
 }
 
 .header-container {
@@ -41,10 +41,9 @@ header {
 	align-items: center;
 }
 
-.logo-square {
+.logo {
 	width: 74px;
-	height: 74px;
-	background-color: #eee;
+	height: auto;
 	margin-right: 24px;
 }
 
@@ -59,7 +58,7 @@ header {
 	list-style: none;
 	display: flex;
 	gap: 32px;
-	margin: 0;
+	margin: 15px 0 0;
 	padding: 0;
 }
 
@@ -100,6 +99,7 @@ header {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
+	padding-top: 70px;
 }
 
 .max-560 {
@@ -218,6 +218,20 @@ header {
 	padding: 16px;
 }
 
+.berechnung-header {
+	display: flex;
+	align-items: center;
+	gap: 100px;
+	width: 100%;
+}
+
+.berechnung-header .small-info {
+	font-family: 'Dongle', sans-serif;
+	font-size: 30px;
+	margin: 0;
+	color: #000;
+}
+
 .factor-box {
 	background-color: #E5C687;
 	border-radius: 10px;
@@ -253,6 +267,12 @@ header {
 	line-height: 1;
 }
 
+.small-info {
+	font-family: 'Dongle', sans-serif;
+	font-size: 30px;
+	margin: 0 0 8px 0;
+	color: #000;
+}
 
 .factor-box-title {
 	display: flex;
@@ -400,7 +420,6 @@ header {
 .form-block-header h3 {
 	font-family: 'Bagel Fat One', cursive;
 	font-size: 40px;
-	padding-left: 15px;
 	margin: 0;
 	color: #000;
 }
@@ -444,12 +463,11 @@ header {
 	appearance: none;
 }
 
-/* Styling for single dropdown blocks (for other steps) */
 .form-block>label {
 	display: block;
 	font-family: 'Bagel Fat One', cursive;
 	font-size: 40px;
-	margin: 0 0 8px 16px;
+	margin: 0 0 8px 0;
 	color: #000;
 }
 
@@ -486,32 +504,108 @@ header {
 	cursor: pointer;
 }
 
-/* Checkbox group styling */
+.checkbox-container {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 16px;
+	justify-items: start;
+}
+
+
+.checkbox-group input[type="checkbox"] {
+	width: 20px;
+	height: 20px;
+	accent-color: rgba(40, 175, 176, 0.5);
+}
+
+.checkbox-group label {
+	font-family: 'Dongle', sans-serif;
+	font-size: 25px;
+	color: #000;
+	margin-left: 8px;
+	vertical-align: middle;
+}
+
+
 .checkbox-group {
 	display: flex;
 	align-items: center;
-	margin-bottom: 8px;
-}
-
-.checkbox-group input[type="checkbox"] {
-	margin-right: 8px;
 }
 
 /* Submit button styling */
 #calculationForm button[type="submit"] {
-	align-self: flex-end;
-	background-color: #FFBA00;
+	align-self: start;
+	background-color: #F4D35E;
 	color: #fff;
 	border: none;
-	padding: 12px 24px;
-	font-size: 20px;
-	border-radius: 8px;
+	padding: 12px 50px;
+	font-size: 40px;
+	border-radius: 10px;
 	cursor: pointer;
-	font-family: 'Bagel Fat One', cursive;
+	font-family: 'Dongle';
 	transition: background-color 0.2s;
-	margin-top: 16px;
+	margin-top: 30px;
 }
 
 #calculationForm button[type="submit"]:hover {
 	background-color: #ffa500;
+}
+
+
+#result-block {
+	background-color: #B6E5E5;
+	margin: 50px 10px 50px 0px;
+}
+
+/* The content area for the result block */
+.result-content {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 24px;
+}
+
+/* A container row for both results */
+.result-row {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	margin-top: 30px;
+}
+
+/* Label styling for the result text */
+.result-label {
+	font-family: 'Dongle', cursive;
+	font-size: 32px;
+	margin: 0;
+	color: #000;
+}
+
+/* The numeric result boxes */
+.result-field {
+	width: 120px;
+	height: 50px;
+	background-color: rgba(40, 175, 176, 0.5);
+	border: none;
+	border-radius: 8px;
+	color: red;
+	font-size: 40px;
+	font-family: 'Dongle', sans-serif;
+	text-align: center;
+	line-height: 50px;
+	cursor: default;
+}
+
+.site-footer {
+	width: 100%;
+	background-color: #f8f8f8;
+	padding: 20px 0;
+	text-align: center;
+}
+
+.site-footer p {
+	font-family: 'Bagel Fat One', cursive;
+	font-size: 20px;
+	color: #aaa;
+	margin: 0;
 }

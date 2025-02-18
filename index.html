@@ -6,10 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Stellplatzschlüssel Berechnung</title>
 	<link rel="stylesheet" href="styles.css">
-	<!-- Preconnect for improved performance -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<!-- Import Bagel Fat One and Dongle -->
 	<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dongle&display=swap" rel="stylesheet">
 </head>
 
@@ -19,9 +17,8 @@
 			<div class="content-container header-container">
 				<!-- Left side: logo + brand name -->
 				<div class="logo-area">
-					<!-- Placeholder square for your logo -->
-					<div class="logo-square"></div>
-					<h1>Tool Name</h1>
+					<img src="images/logo.png" alt="Tool Logo" class="logo">
+					<h1>ParkCalc</h1>
 				</div>
 				<!-- Right side: navigation menu -->
 				<nav>
@@ -216,7 +213,10 @@
 			<!-- Fourth Section (Berechnung) -->
 			<section class="section" id="berechnung">
 				<div class="berechnung-container">
-					<h2 class="methodik-heading">Berechnung</h2>
+					<div class="berechnung-header">
+						<h2 class="methodik-heading">Berechnung</h2>
+						<p class="small-info">Durchlaufe sieben einfache Berechnungsschritte</p>
+					</div>
 					<form id="calculationForm">
 						<!-- Quartiertyp Step -->
 						<div class="form-block">
@@ -251,6 +251,7 @@
 						<!-- Nahversorgung Step -->
 						<div class="form-block">
 							<label for="nahversorgungKategorie">Nahversorgung</label>
+							<p class="small-info">Wegdauer zum einkaufen</p>
 							<select id="nahversorgungKategorie" name="nahversorgungKategorie">
 								<option value="">Bitte wählen</option>
 								<option value="<5">&lt;5 Minuten</option>
@@ -263,20 +264,41 @@
 						<!-- Nutzungsart Step -->
 						<div class="form-block">
 							<label>Nutzungsart (Nicht-Wohnnutzung, Mehrfachauswahl möglich)</label>
-							<div class="checkbox-group">
-								<input type="checkbox" id="nutzungsart_gewerbe" name="nutzungsart" value="gewerbe">
-								<label for="nutzungsart_gewerbe">Gewerbe/Dienstleistungen</label>
+							<p class="small-info">Zusätzlich zum Wohnen. Bitte zutreffende auswählen</p>
+							<div class="checkbox-container">
+								<div class="checkbox-group">
+									<input type="checkbox" id="nutzungsart_gewerbe" name="nutzungsart" value="gewerbe">
+									<label for="nutzungsart_gewerbe">Gewerbe/Dienstleistungen</label>
+								</div>
+								<div class="checkbox-group">
+									<input type="checkbox" id="nutzungsart_bildung" name="nutzungsart" value="bildung">
+									<label for="nutzungsart_bildung">Bildung</label>
+								</div>
+								<div class="checkbox-group">
+									<input type="checkbox" id="nutzungsart_sozial" name="nutzungsart" value="sozial">
+									<label for="nutzungsart_sozial">Soziales</label>
+								</div>
+								<div class="checkbox-group">
+									<input type="checkbox" id="nutzungsart_gesundheit" name="nutzungsart"
+										value="gesundheit">
+									<label for="nutzungsart_gesundheit">Gesundheit</label>
+								</div>
+								<div class="checkbox-group">
+									<input type="checkbox" id="nutzungsart_kultur" name="nutzungsart" value="kultur">
+									<label for="nutzungsart_kultur">Kultur</label>
+								</div>
+								<div class="checkbox-group">
+									<input type="checkbox" id="nutzungsart_freizeit" name="nutzungsart"
+										value="freizeit">
+									<label for="nutzungsart_freizeit">Freizeit</label>
+								</div>
 							</div>
-							<div class="checkbox-group">
-								<input type="checkbox" id="nutzungsart_kultur" name="nutzungsart" value="kultur">
-								<label for="nutzungsart_kultur">Kultur</label>
-							</div>
-							<!-- Add additional checkboxes as needed -->
 						</div>
 
 						<!-- Busanbindung Step -->
 						<div class="form-block">
 							<label for="busCombined">Busanbindung</label>
+							<p class="small-info">Entfernung zur nächsten Haltestelle und Taktung</p>
 							<select id="busCombined" name="busCombined">
 								<option value="">Bitte wählen</option>
 								<option value="<150_hoch">&lt;150 + hoch</option>
@@ -290,6 +312,7 @@
 						<!-- Schienenanbindung Step -->
 						<div class="form-block">
 							<label for="railCombined">Schienenanbindung</label>
+							<p class="small-info">Entfernung zur nächsten Haltestelle und Taktung</p>
 							<select id="railCombined" name="railCombined">
 								<option value="">Bitte wählen</option>
 								<option value="<300_hoch">&lt;300 + hoch</option>
@@ -304,6 +327,7 @@
 						<!-- ÖPNV-Reisezeit Step -->
 						<div class="form-block">
 							<label for="travelTimeCategory">ÖPNV-Reisezeit ins Zentrum</label>
+							<p class="small-info">Reisedauer ins Zentrum</p>
 							<select id="travelTimeCategory" name="travelTimeCategory">
 								<option value="">Bitte wählen</option>
 								<option value="kurz">Kurz</option>
@@ -315,6 +339,7 @@
 						<!-- Wohneinheiten Step -->
 						<div class="form-block">
 							<label for="geplanteWohneinheiten">Wohneinheiten</label>
+							<p class="small-info">geplante Anzahl an Wohneinheiten</p>
 							<input type="number" id="geplanteWohneinheiten" name="geplanteWohneinheiten"
 								placeholder="z.B. 120">
 						</div>
@@ -326,16 +351,27 @@
 			</section>
 
 			<!-- Result Output (optionally inside main container if desired) -->
-			<div id="result">
-				<output id="result">Ergebnis wird hier angezeigt</output>
+			<!-- Ergebnis Block -->
+			<div class="form-block with-header" id="result-block">
+				<div class="form-block-header">
+					<h3>Ergebnis</h3>
+				</div>
+				<div class="form-block-content result-content">
+					<div class="result-row">
+						<label for="stellplatzschluessel" class="result-label">Stellplatzschlüssel:</label>
+						<div class="result-field" id="stellplatzschluessel">--</div>
+
+						<label for="erwartetePkw" class="result-label">zu erwartende Pkw:</label>
+						<div class="result-field" id="erwartetePkw">--</div>
+					</div>
+				</div>
 			</div>
-		</div>
+
 	</main>
 
-	<footer>
-		<p>&copy;
-			<script>document.write(new Date().getFullYear());</script> HCU Smart City WiSe 2024/2025
-		</p>
+	<footer class="site-footer">
+		<p>&copy; 2025 &#9474; Hafencity Universität Hamburg &#9474; Herzberg, Nicolai, Schulte &#9474; SmartCity WiSe
+			2024/2025</p>
 	</footer>
 
 	<!-- Modal for Info Icons -->
