@@ -25,7 +25,7 @@
 
 ## Methodology
 
-The calculation is based on multiplying various factors that represent different urban and transport characteristics. This modular approach is inspired by:
+The calculation is based on multiplying various factors that represent different urban and transport characteristics. This modular approach is described by:
 
 **Tahedl, J. (2021). _Pkw-Besitz im Wohnungsbau: Eine Handreichung zur Ermittlung flexibler Stellplatzschlüssel._**
 
